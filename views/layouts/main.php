@@ -27,8 +27,8 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandLabel' => 'Currency exchange calculator',
+        'brandUrl' => ['/currency/dashboard'],
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
@@ -36,10 +36,10 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Currency', 'url' => ['/currency/index']],
+            //['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Add Currency', 'url' => ['/currency/index']],
             ['label' => 'Dashboard', 'url' => ['/currency/dashboard']],
-            Yii::$app->user->isGuest ? (
+            /*Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
                 '<li>'
@@ -50,7 +50,7 @@ AppAsset::register($this);
                 )
                 . Html::endForm()
                 . '</li>'
-            )
+            )*/
         ],
     ]);
     NavBar::end();

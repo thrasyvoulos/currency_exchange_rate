@@ -12,7 +12,16 @@ use kartik\form\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="currency-dashboard">
+
+<div class="currency-dashboard" style="text-align: center;">
+     <div class="panel panel-info">
+        <div style="margin-top: 10px;margin-right: 10px">
+            <div class="panel-heading">
+              <h2 style="text-align: center;"><?php echo 'Currency exchange calculator' ?></h2>
+
+                <p id="demo" style="text-align:center;"></p>  
+            </div>
+              
  <?php $this->title='Dashboard' ?>
     <?php $form = ActiveForm::begin([
        // 'type' => ActiveForm::TYPE_HORIZONTAL
@@ -48,21 +57,26 @@ use kartik\form\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+         </div>
+           </div>
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   
 </head>
 <script>
+   
     var currency1='';
     var currency2='';
     var currencyval1='';
     var currencyval2='';
+    var text='';
 $( document ).ready(function() {
     currency1= $('#currency-currencyid option:selected').text();
     currency2= $('#currency-currencyid2 option:selected').text();
     currencyval2= document.getElementById('currency-currency2').value;
     currencyval1=document.getElementById('currency-currency1').value;
-    
+    text=currencyval1+' '+currency1+' '+'equals '+currencyval2+' '+currency2;
+    document.getElementById("demo").innerHTML = text;
 });
 $('#currency-currencyid').on('change', function() {
    currency1= $('#currency-currencyid option:selected').text();
@@ -78,6 +92,8 @@ $('#currency-currencyid').on('change', function() {
             success: function(data) {
               document.getElementById('currency-currency2').value =data;
               currencyval2=data;
+              text=currencyval1+' '+currency1+' '+'equals '+currencyval2+' '+currency2;
+              document.getElementById("demo").innerHTML = text;
             }
         });
    
@@ -96,6 +112,8 @@ $('#currency-currencyid2').on('change', function() {
             success: function(data) {
               document.getElementById('currency-currency2').value =data;
               currencyval2=data;
+               text=currencyval1+' '+currency1+' '+'equals '+currencyval2+' '+currency2;
+                document.getElementById("demo").innerHTML = text;
             }
         });
    
