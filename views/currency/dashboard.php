@@ -77,7 +77,7 @@ $('#currency-currencyid').on('change', function() {
                 },
             success: function(data) {
               document.getElementById('currency-currency2').value =data;
-              d=data;
+              currencyval2=data;
             }
         });
    
@@ -95,7 +95,7 @@ $('#currency-currencyid2').on('change', function() {
                 },
             success: function(data) {
               document.getElementById('currency-currency2').value =data;
-              d=data;
+              currencyval2=data;
             }
         });
    
