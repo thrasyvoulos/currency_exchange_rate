@@ -1,15 +1,11 @@
 <?php
 
 use yii\helpers\Html;
-//use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\Dropdown;
 use yii\helpers\Url;
 use kartik\form\ActiveForm;
-/* @var $this yii\web\View */
-/* @var $model app\models\CurrencySearch */
-/* @var $form yii\widgets\ActiveForm */
 ?>
 
 
@@ -18,53 +14,31 @@ use kartik\form\ActiveForm;
         <div style="margin-top: 10px;margin-right: 10px">
             <div class="panel-heading">
               <h2 style="text-align: center;"><?php echo 'Currency exchange calculator' ?></h2>
-
                 <p id="demo" style="text-align:center;"></p>  
-            </div>
-              
- <?php $this->title='Dashboard' ?>
-    <?php $form = ActiveForm::begin([
-       // 'type' => ActiveForm::TYPE_HORIZONTAL
-        //'action' => ['index'],
-       // 'method' => 'get',
-    ]); ?>
-    <div style="display: inline-block;">
-    <?php
-        $data=ArrayHelper::map(\app\models\Currency::find()->orderBy(['abbreviation' => SORT_ASC])->all(), 'currencyid', 'abbreviation');
-    echo $form->field($model, 'currencyid')->dropDownList([
-            'items' => $data,
-        
-            ]);
-    ?>
-           <?php
-        //$data2=ArrayHelper::map(\app\models\Currency::find()->orderBy(['abbreviation' => SORT_ASC])->all(), 'currencyid2', 'abbreviation');
- echo $form->field($model, 'currencyid2')->dropDownList([
-            'items' => $data,
-            
-            ]);
-   
-    
-    ?>
-
-  
-</div>
-     <div style="display: inline-block;">
-   <?php echo $form->field($model, 'currency1')->textInput(); ?>
-<?php echo $form->field($model, 'currency2')->textInput(); ?>
-
-     </div>
-
-    <?php ActiveForm::end(); ?>
-
-</div>
-         </div>
-           </div>
+            </div>              
+                   <?php $this->title='Dashboard' ?>
+                   <?php $form = ActiveForm::begin([]); ?>
+                    <div style="display: inline-block;">
+                      <?php
+                          $data = ArrayHelper::map(\app\models\Currency::find()->orderBy(['abbreviation' => SORT_ASC])->all(), 'currencyid', 'abbreviation');
+                          echo $form->field($model, 'currencyid')->dropDownList(['items' => $data,]);
+                          echo $form->field($model, 'currencyid2')->dropDownList(['items' => $data]);
+                      ?>
+                   </div>
+                   <div style="display: inline-block;">
+                     <?php 
+                       echo $form->field($model, 'currency1')->textInput();
+                       echo $form->field($model, 'currency2')->textInput(); 
+                     ?>
+                  </div>
+                      <?php ActiveForm::end(); ?>
+       </div>
+    </div>
+ </div>
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  
 </head>
 <script>
-   
     var currency1='';
     var currency2='';
     var currencyval1='';
@@ -146,6 +120,5 @@ $('#currency-currency2').on('input', function() {
               currencyval1=data;
             }
         });
-   
 }); 
 </script>  
