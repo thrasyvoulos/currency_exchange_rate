@@ -48,7 +48,7 @@ class CurrencyController extends Controller
         $model = new Currency();
         $model->currency1  = 1;
         $model->currencyid = 1;
-        $rate = $this->actionCurrencyconverter('EUR', 'USD', 1);
+        $rate = Currency::convertCurrency('EUR', 'USD', 1);
         $model->currency2   = $rate;
         $model->currencyid2 = 2;
         return $this->render('dashboard', [
@@ -58,32 +58,9 @@ class CurrencyController extends Controller
 
     public function actionAjaxconverter()
     {
-        $currency_from=$_POST['currencyfrom'];
-        $currency_to=$_POST['currencyto'];
-        $currency_input=$_POST['value'];
-        $yql_base_url = "http://query.yahooapis.com/v1/public/yql";
-        $yql_query = 'select * from yahoo.finance.xchange where pair in ("'.$currency_from.$currency_to.'")';
-        $yql_query_url = $yql_base_url . "?q=" . urlencode($yql_query);
-        $yql_query_url .= "&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
-        $yql_session = file_get_contents($yql_query_url);
-        $yql_json =  json_decode($yql_session,true);
-        $currency_output = (float) $currency_input*$yql_json['query']['results']['rate']['Rate'];
-
-        return $currency_output;
+        $output = Currency::convertCurrency($_POST['currencyfrom'], $_POST['currencyto'], $_POST['value']);
+        return $output;
      }
-
-    public function actionCurrencyconverter($currency_from,$currency_to,$currency_input)
-    {
-        $yql_base_url = "http://query.yahooapis.com/v1/public/yql";
-        $yql_query = 'select * from yahoo.finance.xchange where pair in ("'.$currency_from.$currency_to.'")';
-        $yql_query_url = $yql_base_url . "?q=" . urlencode($yql_query);
-        $yql_query_url .= "&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
-        $yql_session = file_get_contents($yql_query_url);
-        $yql_json =  json_decode($yql_session,true);
-        $currency_output = (float) $currency_input*$yql_json['query']['results']['rate']['Rate'];
-
-        return $currency_output;
-    }
 
     /**
      * Displays a single Currency model.

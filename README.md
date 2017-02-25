@@ -69,6 +69,7 @@ You can then install this project template using the following command:
 ~~~
 php composer.phar global require "fxp/composer-asset-plugin:~1.1.1"
 php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
+
 ~~~
 
 Now you should be able to access the application through the following URL, assuming `basic` is the directory
@@ -78,7 +79,19 @@ directly under the Web root.
 http://localhost/basic/web/
 ~~~
 
+You can install the currency exchange calculator using the following command:
+~~~
+git clone https://github.com/thrasyvoulos/currency_exchange_rate.git
+composer self-update
+composer global require "fxp/composer-asset-plugin:~1.1.1"
+cd currency_exchange_rate
+composer install
+~~~
 
+You can access the application with the following URL:
+~~~
+http://localhost/currency_exchange_rate/web/
+~~~
 CONFIGURATION
 -------------
 
